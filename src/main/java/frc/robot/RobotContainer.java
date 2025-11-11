@@ -15,7 +15,8 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.DriveConstants;
-
+import frc.robot.commands.Drive;
+import frc.robot.subsystems.Drivebase;
 import cowlib.Util;
 
 @Logged
@@ -68,22 +69,10 @@ public class RobotContainer {
 
     Util.square2DVector(xy);
 
-    // Scales the max drive speed when the elevator is enabled.
-    var scaling = drivebase.getDriverMaxVelocity() * this.getElevatorSpeedRatio();
-    xy[0] *= scaling;
-    xy[1] *= scaling;
-
     return xy;
   }
 
   // The function used to scale the drive speed when the elevator is enabled.
-  private double getElevatorSpeedRatio() {
-    if (elevator.encoderPosition() > 70) {
-      return 0.5;
-    } else {
-      return 1;
-    }
-  }
 
   private double scaleRotationAxis(double input) {
     return this.deadband(this.squared(input), DriveConstants.deadband) * drivebase.getMaxAngularVelocity() * -0.6;
@@ -101,51 +90,6 @@ public class RobotContainer {
     /* Intake/Output buttons */
     // Intake
 
-    Trigger leftTriggerLow = driveStick.leftTrigger(0.1);
-    Trigger leftTriggerHigh = driveStick.leftTrigger(0.9);
-
-    Trigger climberMode = new Trigger(() -> this.climberMode);
-
-    leftTriggerLow
-        .and(leftTriggerHigh.negate())
-        .and(climberMode.negate()).whileTrue(Commands.parallel(
-            elevator.collapseCommand(),
-            coralWrist.highBranchesCommand(),
-            coralIntake.intakeCommand()));
-
-    leftTriggerHigh
-        .and(climberMode.negate())
-        .whileTrue(Commands.parallel(
-            elevator.extendCommand(2),
-            coralWrist.highBranchesCommand(),
-            coralIntake.intakeCommand()));
-
-    driveStick.rightTrigger()
-        .and(climberMode.negate())
-        .onTrue(fixCoral);
-
-    /* Align Command Button Logic */
-    Trigger semiAutoCancel = new Trigger(this::anyJoystickInput);
-
-    var fullRumbleCommand = Commands.startEnd(
-        () -> driveStick.setRumble(RumbleType.kBothRumble, 0.5),
-        () -> driveStick.setRumble(RumbleType.kBothRumble, 0));
-
-    var leftRumbleCommand = Commands.startEnd(
-        () -> driveStick.setRumble(RumbleType.kLeftRumble, 0.5),
-        () -> driveStick.setRumble(RumbleType.kLeftRumble, 0));
-
-    var rightRumbleCommand = Commands.startEnd(
-        () -> driveStick.setRumble(RumbleType.kRightRumble, 0.5),
-        () -> driveStick.setRumble(RumbleType.kRightRumble, 0));
-    var rightAlignCommand = Commands.parallel(
-        rightRumbleCommand.withTimeout(0.5),
-        new ReefAlignCommand(drivebase, ReefSide.RIGHT))
-        .until(semiAutoCancel);
-    // This Smart Dashboard value is used by the CANdleSystem.java subsystem
-    // .andThen(() -> SmartDashboard.putBoolean("Aligned", false));
-    driveStick.rightStick().toggleOnTrue(rightAlignCommand);
-    driveStick.povRight().toggleOnTrue(rightAlignCommand);
   }
 
   private boolean anyJoystickInput() {

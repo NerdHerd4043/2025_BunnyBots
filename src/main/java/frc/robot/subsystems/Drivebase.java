@@ -86,8 +86,8 @@ public class Drivebase extends SubsystemBase {
   // The Subscriber "subscribes" to a piece of information, allowing the
   // information to be recieved and updated. Source:
   // https://docs.wpilib.org/en/stable/docs/software/networktables/publish-and-subscribe.html#subscribing-to-a-topic
-  @NotLogged
-  private final DoubleArraySubscriber R_limelightRobotPose;
+  // @NotLogged
+  // private final DoubleArraySubscriber R_limelightRobotPose;
   // This double array is used later to hold information we get from the
   // subscriber. Limelight documentation (as of now) doesn't use a subscriber, but
   // our subscriber is getting the same values that the `botpose_targetspace`
