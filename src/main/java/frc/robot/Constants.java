@@ -148,6 +148,26 @@ public class Constants {
       public static final int distSensorID = 33;
     }
 
+    public static final class IntakeConstants {
+      public static final class PIDValuesC {
+        public static final double p = 0;
+        public static final double i = 0;
+        public static final double d = 0;
+      }
+
+      public static final TrapezoidProfile.Constraints constraints = new TrapezoidProfile.Constraints(
+          3.2, 2.5);
+
+      public static final int UperIntakeMotorID = 3;
+      public static final int LowerIntakeMotorID = 4;
+      public static final int restPos = 4;
+      public static final int outTakePos = 5;
+
+      public static final double outtakePos = 0;
+
+      public static final double intakePos = 0;
+    }
+
     public static final class CoralWrist {
       public static final int motorId = 31;
       public static final int encoderID = 32;
