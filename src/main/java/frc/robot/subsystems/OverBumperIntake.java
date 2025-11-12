@@ -18,12 +18,6 @@ public class OverBumperIntake extends SubsystemBase {
     private SparkMax uperIntakeMotor = new SparkMax(IntakeConstants.UperIntakeMotorID, MotorType.kBrushless);
     private SparkMax lowerIntakeMotor = new SparkMax(IntakeConstants.LowerIntakeMotorID, MotorType.kBrushless);
 
-    private ProfiledPIDController pidController = new ProfiledPIDController(
-            IntakeConstants.PIDValuesC.p,
-            IntakeConstants.PIDValuesC.i,
-            IntakeConstants.PIDValuesC.d,
-            IntakeConstants.constraints);
-
     OverBumperIntake() {
         final SparkMaxConfig uperMotorConfig = new SparkMaxConfig();
         final SparkMaxConfig lowerMotorConfig = new SparkMaxConfig();
@@ -34,39 +28,6 @@ public class OverBumperIntake extends SubsystemBase {
         this.lowerIntakeMotor.configure(lowerMotorConfig, ResetMode.kResetSafeParameters,
                 PersistMode.kPersistParameters);
 
-    }
-
-    public Command highPosCommand() {
-        return this.runOnce(this::setHighPos);
-    }
-
-    public Command lowPosCommand() {
-        return this.runOnce(this::setLowPos);
-    }
-
-    public void setHighPos() {
-        this.setGoal(IntakeConstants.outtakePos);
-    }
-
-    public void setLowPos() {
-        this.setGoal(IntakeConstants.intakePos);
-    }
-
-    public void setSpeed(double speed) {
-        this.uperIntakeMotor.set(speed);
-    }
-
-    private void setGoal(double input) {
-        this.pidController.setGoal(
-                MathUtil.clamp(input, 0.0, ClimberPositionsC.upper));
-    }
-
-    public void stopClimber() {
-        this.uperIntakeMotor.stopMotor();
-    }
-
-    public Command stopCommand() {
-        return this.runOnce(this::stopClimber);
     }
 
 }

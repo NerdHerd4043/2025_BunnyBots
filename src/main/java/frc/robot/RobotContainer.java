@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.commands.Drive;
+import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drivebase;
 import cowlib.Util;
 
@@ -25,6 +26,7 @@ public class RobotContainer {
   // https://docs.wpilib.org/en/stable/docs/software/basic-programming/coordinate-system.html#joystick-and-controller-coordinate-system
   @NotLogged
   private final CommandXboxController driveStick = new CommandXboxController(0);
+  private final Arm Arm = new Arm();
 
   // Creates our subsystems
   private final Drivebase drivebase = new Drivebase();
@@ -90,6 +92,10 @@ public class RobotContainer {
     /* Intake/Output buttons */
     // Intake
 
+    driveStick.a().onTrue(Arm.highPosCommand());
+    driveStick.b().onTrue(Arm.lowPosCommand());
+
+    driveStick.x().whileTrue(Arm.inTake());
   }
 
   private boolean anyJoystickInput() {
