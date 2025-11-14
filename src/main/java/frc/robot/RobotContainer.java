@@ -26,7 +26,7 @@ public class RobotContainer {
   // https://docs.wpilib.org/en/stable/docs/software/basic-programming/coordinate-system.html#joystick-and-controller-coordinate-system
   @NotLogged
   private final CommandXboxController driveStick = new CommandXboxController(0);
-  private final Arm Arm = new Arm();
+  private final Arm arm = new Arm();
 
   // Creates our subsystems
   private final Drivebase drivebase = new Drivebase();
@@ -92,10 +92,12 @@ public class RobotContainer {
     /* Intake/Output buttons */
     // Intake
 
-    driveStick.a().onTrue(Arm.highPosCommand());
-    driveStick.b().onTrue(Arm.lowPosCommand());
+    driveStick.y().onTrue(Commands.runOnce(arm::armDown, arm));
 
-    driveStick.x().whileTrue(Arm.inTake());
+    // Set arm up
+    driveStick.x().onTrue(Commands.runOnce(arm::armUp, arm));
+
+    driveStick.a().whileTrue(arm.runMotorTest());
   }
 
   private boolean anyJoystickInput() {

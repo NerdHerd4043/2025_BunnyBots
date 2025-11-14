@@ -101,58 +101,17 @@ public class Constants {
       }
     }
 
-    public static final class AlgaeIntake {
-      public static final int motorID = 50;
-      public static final int currentLimit = 30;
-      public static final double intakeSpeed = 0;
-    }
-
-    public static final class AlgaeWrist {
-      public static final int motorID = 51;
-      public static final int currentLimit = 30;
-
-      public static final TrapezoidProfile.Constraints constraintsA = new TrapezoidProfile.Constraints(
-          0, 0);
-
-      public static final class PIDValuesA {
-        public static final double p = 0;
-        public static final double i = 0;
-        public static final double d = 0;
-      }
-
-      public static final class FeedForwardValuesA {
-        public static final double kS = 0;
-        public static final double kG = 0;
-        public static final double kV = 0;
-      }
-
-      public static final class WristPositionsA {
-        public static final double lower = 0;
-        public static final double upper = 1;
-      }
-    }
-
-    public static final class CoralIntake {
-      public static final int motorId = 30;
-      public static final double intakeSpeed = 0.6;
-      public static final double outtakeSpeed = 0.5;
-      public static final int currentLimit = 40;
-
-      public static final double distSensorLow = 29;
-      public static final double distSensorHigh = 409;
-      public static final double distSensorHighNoCoral = 540;
-
-      public static final double offsetLowMeters = 0;
-      public static final double offsetHighMeters = 0.3556;
-
-      public static final int distSensorID = 33;
-    }
-
     public static final class ArmConstants {
       public static final class PIDValuesC {
         public static final double p = 1;
         public static final double i = 1;
         public static final double d = 0;
+      }
+
+      public static final class FeedForwardValues {
+        public static final double kS = 0.07;
+        public static final double kG = 0.4;
+        public static final double kV = 3;
       }
 
       public static final int restPos = 4;
@@ -161,13 +120,13 @@ public class Constants {
       public static final double low = 0.0;
       public static final double upper = 2.5;
 
-      public static final double outtakePos = 20;
+      public static final double outtakePos = -5;
 
-      public static final double intakePos = 0;
+      public static final double intakePos = 5;
 
       public static final TrapezoidProfile.Constraints constraints = new TrapezoidProfile.Constraints(
-          3.2, 2.5);
-      public static final int encoderID = 90;
+          .2, 1.5);
+      public static final int encoderID = 31;
 
     }
 
@@ -175,105 +134,6 @@ public class Constants {
 
       public static final int UperIntakeMotorID = 3;
       public static final int LowerIntakeMotorID = 4;
-    }
-
-    public static final class CoralWrist {
-      public static final int motorId = 39;
-      public static final int encoderID = 32;
-      public static final int currentLimit = 30;
-
-      // Limits the CoralWrist PID Controller
-      public static final TrapezoidProfile.Constraints constraints = new TrapezoidProfile.Constraints(
-          6, 10);
-
-      // Tuned manually. Practice here:
-      // https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduction/tuning-vertical-arm.html
-      // FIXME: Fine-tune
-      public static final class PIDValuesC {
-        public static final double p = 10;
-        public static final double i = 0;
-        public static final double d = 0;
-      }
-
-      // Found manually. Put the encoder value on the driver station dashboard and
-      // move the encoder to the desired position, then record the value.
-      public static final class WristPositionsC {
-        public static final double lower = 0;
-        public static final double upper = 1.20;
-        public static final double stationPos = 1.20;
-        public static final double L2BranchPos = 0.43;
-        public static final double highBranchesPos = 0;
-      }
-    }
-
-    // todo: give climber actual values
-    public static final class Climber {
-      public static final int rightMotorId = 60;
-      public static final int leftMotorId = 62;
-      public static final int encoderID = 61;
-      public static final int currentLimit = 40;
-
-      public static final double maxClimberRotation = 1.23;
-
-      // Limits the Climber PID Controller
-      public static final TrapezoidProfile.Constraints constraints = new TrapezoidProfile.Constraints(
-          3.2, 2.5);
-
-      // Tuned manually. Practice here:
-      // https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduction/tuning-vertical-arm.html
-      public static final class PIDValuesC {
-        public static final double p = 2.8;
-        public static final double i = 1.4;
-        public static final double d = 0;
-      }
-
-      // Found manually. Put the encoder value on the driver station dashboard and
-      // move the encoder to the desired position, then record the value.
-      public static final class ClimberPositionsC {
-        public static final double lower = 0;
-        public static final double upper = 1.23;
-        public static final double upPos = 0.43;
-        public static final double downPos = 0;
-      }
-    }
-
-    public static final class Elevator {
-      public static final int currentLimit = 40;
-
-      public static final TrapezoidProfile.Constraints constraints = // I just lost the game
-          new TrapezoidProfile.Constraints(90, 190);
-
-      public static final int leftMotorId = 41;
-      public static final int rightMotorId = 40;
-
-      // This is an encoder value found by manually raising the elevator to max height
-      // after it was zeroed at the bottom and while the encoder value was put on the
-      // dashboard.
-      public static final double maxElevatorHeight = 134.49;
-
-      public static final double[] elevatorHeights = {
-          0.0, // Colapse
-          4, // Coral station height (Ours was about 36.5 in) - 3.125, 4.25+ ; 3.125, 4-
-          41, // L2 (we don't use this, it's a placeholder)
-          63, // L3
-          maxElevatorHeight * 0.99 // L4
-      };
-
-      // Tuned manually. Practice here (different than the arm):
-      // https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduction/tuning-elevator.html
-      public static final class PIDValuesE {
-        public static final double p = 1.5;
-        public static final double i = 0;
-        public static final double d = 0;
-      }
-
-      // Tuned manually. Practice here (different than the arm):
-      // https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduction/tuning-elevator.html
-      public static final class FeedForwardValues {
-        public static final double kS = 0;
-        public static final double kG = 0.33;
-        public static final double kV = 0;
-      }
     }
 
     public static final class CANdleConstants {
