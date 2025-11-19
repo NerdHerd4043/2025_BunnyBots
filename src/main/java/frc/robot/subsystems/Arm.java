@@ -45,7 +45,6 @@ public class Arm extends SubsystemBase {
         final SparkMaxConfig armMotorConfig = new SparkMaxConfig();
 
         this.armMotor.configure(armMotorConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-
         this.pidController.setGoal(getEncoderRadians());
 
         // tune the arm
@@ -127,8 +126,8 @@ public class Arm extends SubsystemBase {
                 pidController.getSetpoint());
 
         SmartDashboard.putNumber("ArmGoal", this.pidController.getGoal().position);
-        SmartDashboard.putNumber("pos", getMeasurement());
-        SmartDashboard.putNumber("encoder", getEncoder());
+        SmartDashboard.putNumber("pos", this.getMeasurement());
+        SmartDashboard.putNumber("encoder", this.getEncoder());
 
     }
 }

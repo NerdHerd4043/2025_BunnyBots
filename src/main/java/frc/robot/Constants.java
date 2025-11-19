@@ -126,14 +126,14 @@ public class Constants {
 
       public static final TrapezoidProfile.Constraints constraints = new TrapezoidProfile.Constraints(
           .2, 1.5);
-      public static final int encoderID = 31;
+      public static final int encoderID = 32;
 
     }
 
     public static final class IntakeConstants {
 
-      public static final int UperIntakeMotorID = 3;
-      public static final int LowerIntakeMotorID = 4;
+      public static final int UperIntakeMotorID = 80;
+      public static final int LowerIntakeMotorID = 94;
     }
 
     public static final class CANdleConstants {

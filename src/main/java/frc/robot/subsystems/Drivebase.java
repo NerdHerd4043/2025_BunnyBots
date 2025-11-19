@@ -40,13 +40,17 @@ import frc.robot.Constants.DriveConstants.SwerveModules;
 @Logged
 public class Drivebase extends SubsystemBase {
   private SwerveModule frontLeft = new SwerveModule(
-      SwerveModules.frontLeft, DriveConstants.maxVelocity, DriveConstants.maxVoltage);
+      SwerveModules.frontLeft, DriveConstants.maxVelocity,
+      DriveConstants.maxVoltage);
   private SwerveModule frontRight = new SwerveModule(
-      SwerveModules.frontRight, DriveConstants.maxVelocity, DriveConstants.maxVoltage);
+      SwerveModules.frontRight, DriveConstants.maxVelocity,
+      DriveConstants.maxVoltage);
   private SwerveModule backLeft = new SwerveModule(
-      SwerveModules.backLeft, DriveConstants.maxVelocity, DriveConstants.maxVoltage);
+      SwerveModules.backLeft, DriveConstants.maxVelocity,
+      DriveConstants.maxVoltage);
   private SwerveModule backRight = new SwerveModule(
-      SwerveModules.backRight, DriveConstants.maxVelocity, DriveConstants.maxVoltage);
+      SwerveModules.backRight, DriveConstants.maxVelocity,
+      DriveConstants.maxVoltage);
 
   @NotLogged
   private SwerveModule[] modules = new SwerveModule[] {
