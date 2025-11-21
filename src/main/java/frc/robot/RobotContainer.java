@@ -18,6 +18,7 @@ import frc.robot.Constants.DriveConstants;
 import frc.robot.commands.Drive;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drivebase;
+import frc.robot.subsystems.OverBumperIntake;
 import cowlib.Util;
 
 @Logged
@@ -27,6 +28,7 @@ public class RobotContainer {
   @NotLogged
   private final CommandXboxController driveStick = new CommandXboxController(0);
   private final Arm arm = new Arm();
+  private final OverBumperIntake intake = new OverBumperIntake();
 
   // Creates our subsystems
   private final Drivebase drivebase = new Drivebase();
@@ -97,7 +99,10 @@ public class RobotContainer {
     // Set arm up
     driveStick.x().onTrue(Commands.runOnce(arm::armUp, arm));
 
-    driveStick.a().whileTrue(arm.runMotorTest());
+    driveStick.leftStick().whileTrue(intake.intake());
+
+    driveStick.a().whileTrue(intake.intakePos());
+    driveStick.b().whileTrue(intake.outTakePos());
   }
 
   private boolean anyJoystickInput() {

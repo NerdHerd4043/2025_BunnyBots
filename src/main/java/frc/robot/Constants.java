@@ -132,8 +132,8 @@ public class Constants {
 
     public static final class IntakeConstants {
 
-      public static final int UperIntakeMotorID = 80;
-      public static final int LowerIntakeMotorID = 94;
+      public static final int UpperIntakeMotorID = 62;
+      public static final int LowerIntakeMotorID = 61;
     }
 
     public static final class CANdleConstants {

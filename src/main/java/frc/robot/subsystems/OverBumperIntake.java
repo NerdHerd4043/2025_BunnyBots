@@ -14,18 +14,60 @@ import frc.robot.Constants;
 import frc.robot.Constants.DriveConstants.IntakeConstants;
 
 public class OverBumperIntake extends SubsystemBase {
-    private SparkMax uperIntakeMotor = new SparkMax(IntakeConstants.UperIntakeMotorID, MotorType.kBrushless);
+    private SparkMax upperIntakeMotor = new SparkMax(IntakeConstants.UpperIntakeMotorID, MotorType.kBrushless);
     private SparkMax lowerIntakeMotor = new SparkMax(IntakeConstants.LowerIntakeMotorID, MotorType.kBrushless);
 
-    OverBumperIntake() {
-        final SparkMaxConfig uperMotorConfig = new SparkMaxConfig();
+    private SparkMax leftFoldingMotor = new SparkMax(30, MotorType.kBrushless);
+    private SparkMax rightFoldingMotor = new SparkMax(29, MotorType.kBrushless);
+
+    public OverBumperIntake() {
+        final SparkMaxConfig upperMotorConfig = new SparkMaxConfig();
         final SparkMaxConfig lowerMotorConfig = new SparkMaxConfig();
 
-        lowerMotorConfig.follow(uperIntakeMotor, true);
+        upperMotorConfig.inverted(true);
 
-        this.uperIntakeMotor.configure(uperMotorConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+        lowerMotorConfig.follow(upperIntakeMotor, true);
+
+        this.upperIntakeMotor.configure(upperMotorConfig, ResetMode.kResetSafeParameters,
+                PersistMode.kPersistParameters);
         this.lowerIntakeMotor.configure(lowerMotorConfig, ResetMode.kResetSafeParameters,
                 PersistMode.kPersistParameters);
+
+        final SparkMaxConfig leftFoldingMotorConfig = new SparkMaxConfig();
+        final SparkMaxConfig rightFoldingMotorConfig = new SparkMaxConfig();
+
+        leftFoldingMotorConfig.follow(rightFoldingMotor, true);
+
+        this.rightFoldingMotor.configure(rightFoldingMotorConfig, ResetMode.kResetSafeParameters,
+                PersistMode.kPersistParameters);
+        this.leftFoldingMotor.configure(leftFoldingMotorConfig, ResetMode.kResetSafeParameters,
+                PersistMode.kPersistParameters);
+    }
+
+    public Command intake() {
+        return this.run(() -> {
+            upperIntakeMotor.set(0.5);
+        }).finallyDo(() -> {
+            upperIntakeMotor.stopMotor();
+        });
+
+    }
+
+    public Command intakePos() {
+        return this.run(() -> {
+            rightFoldingMotor.set(0.5);
+        }).finallyDo(() -> {
+            rightFoldingMotor.stopMotor();
+        });
+
+    }
+
+    public Command outTakePos() {
+        return this.run(() -> {
+            rightFoldingMotor.set(-0.5);
+        }).finallyDo(() -> {
+            rightFoldingMotor.stopMotor();
+        });
 
     }
 
