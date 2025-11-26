@@ -116,13 +116,13 @@ public class Constants {
 
       public static final int restPos = 4;
       public static final int outTakePos = 5;
-      public static final int ArmMotorID = 31;
+      public static final int ArmMotorID = 27;
       public static final double low = 0.0;
       public static final double upper = 2.5;
 
-      public static final double outtakePos = -5;
+      public static final double outtakePos = -1;
 
-      public static final double intakePos = 5;
+      public static final double intakePos = 1;
 
       public static final TrapezoidProfile.Constraints constraints = new TrapezoidProfile.Constraints(
           .2, 1.5);
@@ -132,8 +132,28 @@ public class Constants {
 
     public static final class IntakeConstants {
 
+      public static final class PIDValuesC {
+        public static final double p = 1;
+        public static final double i = 1;
+        public static final double d = 0;
+      }
+
+      public static final class FeedForwardValues {
+        public static final double kS = 0.07;
+        public static final double kG = 0.4;
+        public static final double kV = 3;
+      }
+
       public static final int UpperIntakeMotorID = 62;
       public static final int LowerIntakeMotorID = 61;
+
+      public static final int leftFoldingMotorID = 31;
+      public static final int rightFoldingMotorID = 29;
+
+      public static final TrapezoidProfile.Constraints constraints = new TrapezoidProfile.Constraints(
+          .2, 1.5);
+      public static final int encoderID = 29;
+
     }
 
     public static final class CANdleConstants {

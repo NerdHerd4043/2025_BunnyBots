@@ -91,18 +91,17 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-    /* Intake/Output buttons */
-    // Intake
 
     driveStick.y().onTrue(Commands.runOnce(arm::armDown, arm));
 
-    // Set arm up
     driveStick.x().onTrue(Commands.runOnce(arm::armUp, arm));
 
-    driveStick.leftStick().whileTrue(intake.intake());
+    driveStick.a().whileTrue(intake.intake());
 
-    driveStick.a().whileTrue(intake.intakePos());
-    driveStick.b().whileTrue(intake.outTakePos());
+    driveStick.leftStick().onTrue(Commands.runOnce(intake::restPos, intake));
+
+    driveStick.rightStick().onTrue(Commands.runOnce(intake::intakePos, intake));
+
   }
 
   private boolean anyJoystickInput() {
