@@ -60,10 +60,10 @@ public class Constants {
     // Creates SwerveModules for use in Drivebase. Sets IDs for the motors and
     // encoder of each module, as well as direction of drive.
     public static final class SwerveModules {
-      public static final SwerveModuleConfig frontLeft = new SwerveModuleConfig(1, 11, 21, true);
-      public static final SwerveModuleConfig frontRight = new SwerveModuleConfig(2, 12, 22, true);
-      public static final SwerveModuleConfig backLeft = new SwerveModuleConfig(3, 13, 23, true);
-      public static final SwerveModuleConfig backRight = new SwerveModuleConfig(4, 14, 24, true);
+      public static final SwerveModuleConfig frontLeft = new SwerveModuleConfig(1, 2, 21, true);
+      public static final SwerveModuleConfig frontRight = new SwerveModuleConfig(3, 4, 22, true);
+      public static final SwerveModuleConfig backLeft = new SwerveModuleConfig(5, 6, 23, true);
+      public static final SwerveModuleConfig backRight = new SwerveModuleConfig(7, 8, 24, true);
     }
 
     public static final class ModuleLocations {
@@ -116,7 +116,7 @@ public class Constants {
 
       public static final int restPos = 4;
       public static final int outTakePos = 5;
-      public static final int ArmMotorID = 27;
+      public static final int ArmMotorID = 13;
       public static final double low = 0.0;
       public static final double upper = 2.5;
 
@@ -144,11 +144,11 @@ public class Constants {
         public static final double kV = 3;
       }
 
-      public static final int UpperIntakeMotorID = 62;
-      public static final int LowerIntakeMotorID = 61;
+      public static final int UpperIntakeMotorID = 9;
+      public static final int LowerIntakeMotorID = 10;
 
-      public static final int leftFoldingMotorID = 31;
-      public static final int rightFoldingMotorID = 29;
+      public static final int leftFoldingMotorID = 11;
+      public static final int rightFoldingMotorID = 12;
 
       public static final TrapezoidProfile.Constraints constraints = new TrapezoidProfile.Constraints(
           .2, 1.5);
