@@ -98,10 +98,6 @@ public class RobotContainer {
 
     driveStick.a().whileTrue(intake.intake());
 
-    driveStick.leftStick().onTrue(Commands.runOnce(intake::restPos, intake));
-
-    driveStick.rightStick().onTrue(Commands.runOnce(intake::intakePos, intake));
-
   }
 
   private boolean anyJoystickInput() {

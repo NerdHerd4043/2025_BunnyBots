@@ -25,19 +25,6 @@ public class OverBumperIntake extends SubsystemBase {
     private SparkMax leftFoldingMotor = new SparkMax(IntakeConstants.leftFoldingMotorID, MotorType.kBrushless);
     private SparkMax rightFoldingMotor = new SparkMax(IntakeConstants.rightFoldingMotorID, MotorType.kBrushless);
 
-    private CANcoder encoder = new CANcoder(IntakeConstants.encoderID);
-    private ArmFeedforward feedforward = new ArmFeedforward(ArmConstants.FeedForwardValues.kS,
-            ArmConstants.FeedForwardValues.kG,
-            ArmConstants.FeedForwardValues.kV);
-
-    private double ffOutput;
-
-    private ProfiledPIDController pidController = new ProfiledPIDController(
-            IntakeConstants.PIDValuesC.p,
-            IntakeConstants.PIDValuesC.i,
-            IntakeConstants.PIDValuesC.d,
-            IntakeConstants.constraints);
-
     public OverBumperIntake() {
         final SparkMaxConfig upperMotorConfig = new SparkMaxConfig();
         final SparkMaxConfig lowerMotorConfig = new SparkMaxConfig();
@@ -71,58 +58,23 @@ public class OverBumperIntake extends SubsystemBase {
 
     }
 
-    private void useOutput(double output, TrapezoidProfile.State setpoint) {
-        ffOutput = -feedforward.calculate(setpoint.position, setpoint.velocity);
-        output = -output;
-        rightFoldingMotor.setVoltage(ffOutput + output);
-    }
+    public Command intakePosCommand() {
+        return this.run(() -> {
+            rightFoldingMotor.set(0.5);
+        }).finallyDo(() -> {
+            try {
+                wait(1000);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
 
-    public void setTarget(double target) {
-        // ArmPositions.upper is lower than ArmPositions.lower
-        this.pidController.setGoal(MathUtil.clamp(target, ArmConstants.outtakePos,
-                ArmConstants.intakePos));
-    }
+            rightFoldingMotor.stopMotor();
 
-    public void setTargetRotations(double target) {
-        setTarget(target * 2 * Math.PI);
-    }
-
-    public void adjustTarget(double delta) {
-        if (Math.abs(delta) > 0.01) {
-        }
-
-        setTarget(this.pidController.getGoal().position + delta);
-    }
-
-    public void restPos() {
-        setTarget(ArmConstants.outtakePos);
-    }
-
-    public void intakePos() {
-        setTarget(ArmConstants.intakePos);
-    }
-
-    public double getEncoder() {
-        return encoder.getAbsolutePosition().getValueAsDouble();
-    }
-
-    public double getEncoderRadians() {
-        return getEncoder() * 2 * Math.PI;
-    }
-
-    public double getMeasurement() {
-        // Return the process variable measurement here
-        return getEncoderRadians();
+        });
     }
 
     public void periodic() {
-        useOutput(pidController.calculate(getMeasurement()),
-                pidController.getSetpoint());
-
-        // SmartDashboard.putNumber("ArmGoal", this.pidController.getGoal().position);
-        // SmartDashboard.putNumber("pos", this.getMeasurement());
-        // SmartDashboard.putNumber("encoder", this.getEncoder());
 
     }
-
 }
