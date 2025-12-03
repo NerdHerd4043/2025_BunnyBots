@@ -5,6 +5,7 @@ import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
 import edu.wpi.first.math.MathUtil;
@@ -41,7 +42,9 @@ public class OverBumperIntake extends SubsystemBase {
         final SparkMaxConfig leftFoldingMotorConfig = new SparkMaxConfig();
         final SparkMaxConfig rightFoldingMotorConfig = new SparkMaxConfig();
 
-        leftFoldingMotorConfig.follow(rightFoldingMotor, true);
+        rightFoldingMotorConfig.idleMode(IdleMode.kBrake);
+
+        // leftFoldingMotorConfig.follow(rightFoldingMotor, true);
 
         this.rightFoldingMotor.configure(rightFoldingMotorConfig, ResetMode.kResetSafeParameters,
                 PersistMode.kPersistParameters);
@@ -58,20 +61,13 @@ public class OverBumperIntake extends SubsystemBase {
 
     }
 
-    public Command intakePosCommand() {
+    public Command intakePos() {
         return this.run(() -> {
             rightFoldingMotor.set(0.5);
         }).finallyDo(() -> {
-            try {
-                wait(1000);
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-
             rightFoldingMotor.stopMotor();
-
         });
+
     }
 
     public void periodic() {

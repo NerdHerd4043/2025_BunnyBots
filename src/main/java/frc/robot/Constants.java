@@ -116,7 +116,9 @@ public class Constants {
 
       public static final int restPos = 4;
       public static final int outTakePos = 5;
+
       public static final int ArmMotorID = 13;
+
       public static final double low = 0.0;
       public static final double upper = 2.5;
 
