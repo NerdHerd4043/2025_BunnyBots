@@ -105,7 +105,7 @@ public class Constants {
       public static final class PIDValuesC {
         public static final double p = 1;
         public static final double i = 1;
-        public static final double d = 0;
+        public static final double d = 0.01;
       }
 
       public static final class FeedForwardValues {
@@ -114,17 +114,11 @@ public class Constants {
         public static final double kV = 3;
       }
 
-      public static final int restPos = 4;
-      public static final int outTakePos = 5;
-
       public static final int ArmMotorID = 13;
 
-      public static final double low = 0.0;
-      public static final double upper = 2.5;
+      public static final double outtakePos = 0;
 
-      public static final double outtakePos = -1;
-
-      public static final double intakePos = 1;
+      public static final double intakePos = 0.5;
 
       public static final TrapezoidProfile.Constraints constraints = new TrapezoidProfile.Constraints(
           .2, 1.5);
@@ -140,7 +134,9 @@ public class Constants {
       public static final int leftFoldingMotorID = 11;
       public static final int rightFoldingMotorID = 12;
 
-      public boolean intakePosRan = false;
+      public static boolean intakePosRan = false;
+
+      public static final double waitTime = 1.0;
 
     }
 

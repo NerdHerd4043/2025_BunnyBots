@@ -14,6 +14,7 @@ import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Constants.DriveConstants.ArmConstants;
@@ -30,8 +31,6 @@ public class OverBumperIntake extends SubsystemBase {
         final SparkMaxConfig upperMotorConfig = new SparkMaxConfig();
         final SparkMaxConfig lowerMotorConfig = new SparkMaxConfig();
 
-        upperMotorConfig.inverted(true);
-
         lowerMotorConfig.follow(upperIntakeMotor, true);
 
         this.upperIntakeMotor.configure(upperMotorConfig, ResetMode.kResetSafeParameters,
@@ -43,6 +42,7 @@ public class OverBumperIntake extends SubsystemBase {
         final SparkMaxConfig rightFoldingMotorConfig = new SparkMaxConfig();
 
         rightFoldingMotorConfig.idleMode(IdleMode.kBrake);
+        leftFoldingMotorConfig.idleMode(IdleMode.kBrake);
 
         // leftFoldingMotorConfig.follow(rightFoldingMotor, true);
 
@@ -62,10 +62,15 @@ public class OverBumperIntake extends SubsystemBase {
     }
 
     public Command intakePos() {
-        return this.run(() -> {
-            rightFoldingMotor.set(0.5);
-        }).finallyDo(() -> {
+        return this.runOnce(() -> {
+            if (!IntakeConstants.intakePosRan) {
+                rightFoldingMotor.set(0.5);
+            } else {
+                rightFoldingMotor.stopMotor();
+            }
+        }).andThen(Commands.waitSeconds(IntakeConstants.waitTime)).finallyDo(() -> {
             rightFoldingMotor.stopMotor();
+            IntakeConstants.intakePosRan = true;
         });
 
     }

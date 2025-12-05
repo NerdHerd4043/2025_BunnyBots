@@ -98,7 +98,7 @@ public class RobotContainer {
 
     driveStick.a().whileTrue(intake.intake());
 
-    driveStick.leftBumper().whileTrue(intake.intakePos());
+    driveStick.leftBumper().onTrue(intake.intakePos());
 
   }
 
