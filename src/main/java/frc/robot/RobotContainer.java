@@ -23,12 +23,12 @@ public class RobotContainer {
   // https://docs.wpilib.org/en/stable/docs/software/basic-programming/coordinate-system.html#joystick-and-controller-coordinate-system
   @NotLogged
   private final CommandXboxController driveStick = new CommandXboxController(0);
-  private final Arm arm = new Arm();
-  private final Intake intake = new Intake();
-  private final Intakefolding intakeFolding = new Intakefolding();
 
   // Creates our subsystems
   private final Drivebase drivebase = new Drivebase();
+  private final Arm arm = new Arm();
+  private final Intake intake = new Intake();
+  private final Intakefolding intakeFolding = new Intakefolding();
 
   // This, plus some lines below, creates a drop down menu on the dashboard for
   // selecting our auto.
@@ -89,12 +89,15 @@ public class RobotContainer {
 
   private void configureBindings() {
 
+    // moves the bucket
     driveStick.a().whileTrue(arm.outtake());
     driveStick.b().whileTrue(arm.loadPos());
 
+    // runs the intake
     driveStick.leftBumper().whileTrue(intake.intake());
     driveStick.rightBumper().whileTrue(intake.reverse());
 
+    // moves the intake
     driveStick.leftTrigger().whileTrue(intakeFolding.intakePos());
     driveStick.rightTrigger().whileTrue(intakeFolding.startPos());
 

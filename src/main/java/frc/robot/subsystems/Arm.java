@@ -17,7 +17,6 @@ public class Arm extends SubsystemBase {
         final SparkMaxConfig armMotorConfig = new SparkMaxConfig();
 
         this.armMotor.configure(armMotorConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-
     }
 
     public Command outtake() {
@@ -37,5 +36,4 @@ public class Arm extends SubsystemBase {
         });
 
     }
-
 }

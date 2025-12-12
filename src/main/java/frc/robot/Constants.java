@@ -101,7 +101,6 @@ public class Constants {
     public static final class ArmConstants {
 
       public static final int ArmMotorID = 6;
-
     }
 
     public static final class IntakeConstants {
@@ -111,8 +110,6 @@ public class Constants {
 
       public static final int leftFoldingMotorID = 7;
       public static final int rightFoldingMotorID = 8;
-
     }
-
   }
 }
