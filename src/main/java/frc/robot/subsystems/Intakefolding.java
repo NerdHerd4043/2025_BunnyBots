@@ -39,7 +39,7 @@ public class Intakefolding extends SubsystemBase {
 
     }
 
-    public Command outtakePos() {
+    public Command startPos() {
         return this.run(() -> {
             rightFoldingMotor.set(-0.1);
         }).finallyDo(() -> {

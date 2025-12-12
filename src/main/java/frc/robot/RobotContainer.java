@@ -96,7 +96,7 @@ public class RobotContainer {
     driveStick.rightBumper().whileTrue(intake.reverse());
 
     driveStick.leftTrigger().whileTrue(intakeFolding.intakePos());
-    driveStick.rightTrigger().whileTrue(intakeFolding.outtakePos());
+    driveStick.rightTrigger().whileTrue(intakeFolding.startPos());
 
   }
 
