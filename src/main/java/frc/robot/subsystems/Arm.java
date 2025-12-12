@@ -18,8 +18,6 @@ public class Arm extends SubsystemBase {
 
         this.armMotor.configure(armMotorConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
-        // tune the arm
-
     }
 
     public Command outtake() {
