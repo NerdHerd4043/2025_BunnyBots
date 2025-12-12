@@ -18,7 +18,8 @@ import frc.robot.Constants.DriveConstants;
 import frc.robot.commands.Drive;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drivebase;
-import frc.robot.subsystems.OverBumperIntake;
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Intakefolding;
 import cowlib.Util;
 
 @Logged
@@ -28,7 +29,8 @@ public class RobotContainer {
   @NotLogged
   private final CommandXboxController driveStick = new CommandXboxController(0);
   private final Arm arm = new Arm();
-  private final OverBumperIntake intake = new OverBumperIntake();
+  private final Intake intake = new Intake();
+  private final Intakefolding intakeFolding = new Intakefolding();
 
   // Creates our subsystems
   private final Drivebase drivebase = new Drivebase();
@@ -93,12 +95,12 @@ public class RobotContainer {
   private void configureBindings() {
 
     driveStick.y().onTrue(Commands.runOnce(arm::armDown, arm));
-
     driveStick.x().onTrue(Commands.runOnce(arm::armUp, arm));
 
-    driveStick.a().whileTrue(intake.intake());
+    driveStick.leftTrigger().whileTrue(intake.intake());
+    driveStick.rightTrigger().whileTrue(intake.outtake());
 
-    driveStick.leftBumper().onTrue(intake.intakePos());
+    driveStick.leftBumper().onTrue(intakeFolding.intakePos());
 
   }
 

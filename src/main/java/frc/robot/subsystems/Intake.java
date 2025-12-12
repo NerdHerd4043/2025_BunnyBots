@@ -20,14 +20,11 @@ import frc.robot.Constants;
 import frc.robot.Constants.DriveConstants.ArmConstants;
 import frc.robot.Constants.DriveConstants.IntakeConstants;
 
-public class OverBumperIntake extends SubsystemBase {
+public class Intake extends SubsystemBase {
     private SparkMax upperIntakeMotor = new SparkMax(IntakeConstants.UpperIntakeMotorID, MotorType.kBrushless);
     private SparkMax lowerIntakeMotor = new SparkMax(IntakeConstants.LowerIntakeMotorID, MotorType.kBrushless);
 
-    private SparkMax leftFoldingMotor = new SparkMax(IntakeConstants.leftFoldingMotorID, MotorType.kBrushless);
-    private SparkMax rightFoldingMotor = new SparkMax(IntakeConstants.rightFoldingMotorID, MotorType.kBrushless);
-
-    public OverBumperIntake() {
+    public Intake() {
         final SparkMaxConfig upperMotorConfig = new SparkMaxConfig();
         final SparkMaxConfig lowerMotorConfig = new SparkMaxConfig();
 
@@ -37,19 +34,6 @@ public class OverBumperIntake extends SubsystemBase {
                 PersistMode.kPersistParameters);
         this.lowerIntakeMotor.configure(lowerMotorConfig, ResetMode.kResetSafeParameters,
                 PersistMode.kPersistParameters);
-
-        final SparkMaxConfig leftFoldingMotorConfig = new SparkMaxConfig();
-        final SparkMaxConfig rightFoldingMotorConfig = new SparkMaxConfig();
-
-        rightFoldingMotorConfig.idleMode(IdleMode.kBrake);
-        leftFoldingMotorConfig.idleMode(IdleMode.kBrake);
-
-        // leftFoldingMotorConfig.follow(rightFoldingMotor, true);
-
-        this.rightFoldingMotor.configure(rightFoldingMotorConfig, ResetMode.kResetSafeParameters,
-                PersistMode.kPersistParameters);
-        this.leftFoldingMotor.configure(leftFoldingMotorConfig, ResetMode.kResetSafeParameters,
-                PersistMode.kPersistParameters);
     }
 
     public Command intake() {
@@ -58,24 +42,13 @@ public class OverBumperIntake extends SubsystemBase {
         }).finallyDo(() -> {
             upperIntakeMotor.stopMotor();
         });
-
     }
 
-    public Command intakePos() {
-        return this.runOnce(() -> {
-            if (!IntakeConstants.intakePosRan) {
-                rightFoldingMotor.set(0.5);
-            } else {
-                rightFoldingMotor.stopMotor();
-            }
-        }).andThen(Commands.waitSeconds(IntakeConstants.waitTime)).finallyDo(() -> {
-            rightFoldingMotor.stopMotor();
-            IntakeConstants.intakePosRan = true;
+    public Command outtake() {
+        return this.run(() -> {
+            upperIntakeMotor.set(-0.5);
+        }).finallyDo(() -> {
+            upperIntakeMotor.stopMotor();
         });
-
-    }
-
-    public void periodic() {
-
     }
 }
