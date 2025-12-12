@@ -5,10 +5,7 @@
 package frc.robot;
 
 import cowlib.SwerveModuleConfig;
-import cowlib.Util;
 import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.math.system.plant.DCMotor;
-import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
 
 /** Add your docs here. */
@@ -102,27 +99,8 @@ public class Constants {
     }
 
     public static final class ArmConstants {
-      public static final class PIDValuesC {
-        public static final double p = 1;
-        public static final double i = 1;
-        public static final double d = 0.01;
-      }
 
-      public static final class FeedForwardValues {
-        public static final double kS = 0.07;
-        public static final double kG = 0.4;
-        public static final double kV = 3;
-      }
-
-      public static final int ArmMotorID = 13;
-
-      public static final double outtakePos = 0;
-
-      public static final double intakePos = 0.5;
-
-      public static final TrapezoidProfile.Constraints constraints = new TrapezoidProfile.Constraints(
-          .2, 1.5);
-      public static final int encoderID = 32;
+      public static final int ArmMotorID = 6;
 
     }
 
@@ -131,18 +109,9 @@ public class Constants {
       public static final int UpperIntakeMotorID = 9;
       public static final int LowerIntakeMotorID = 10;
 
-      public static final int leftFoldingMotorID = 11;
-      public static final int rightFoldingMotorID = 12;
+      public static final int leftFoldingMotorID = 7;
+      public static final int rightFoldingMotorID = 8;
 
-      public static boolean intakePosRan = false;
-
-      public static final double waitTime = 1.0;
-
-    }
-
-    public static final class CANdleConstants {
-      public static final int CANdleID = 38;
-      public static final int ledCount = 80;
     }
 
   }

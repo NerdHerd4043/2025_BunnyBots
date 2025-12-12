@@ -8,7 +8,6 @@ import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants.IntakeConstants;
 
@@ -23,7 +22,7 @@ public class Intakefolding extends SubsystemBase {
         rightFoldingMotorConfig.idleMode(IdleMode.kBrake);
         leftFoldingMotorConfig.idleMode(IdleMode.kBrake);
 
-        // leftFoldingMotorConfig.follow(rightFoldingMotor, true);
+        leftFoldingMotorConfig.follow(rightFoldingMotor, true);
 
         this.rightFoldingMotor.configure(rightFoldingMotorConfig, ResetMode.kResetSafeParameters,
                 PersistMode.kPersistParameters);
@@ -32,7 +31,7 @@ public class Intakefolding extends SubsystemBase {
     }
 
     public Command intakePos() {
-        return this.runOnce(() -> {
+        return this.run(() -> {
             rightFoldingMotor.set(0.1);
         }).finallyDo(() -> {
             rightFoldingMotor.stopMotor();
@@ -41,7 +40,7 @@ public class Intakefolding extends SubsystemBase {
     }
 
     public Command outtakePos() {
-        return this.runOnce(() -> {
+        return this.run(() -> {
             rightFoldingMotor.set(-0.1);
         }).finallyDo(() -> {
             rightFoldingMotor.stopMotor();

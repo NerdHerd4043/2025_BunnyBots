@@ -4,16 +4,11 @@
 
 package frc.robot;
 
-import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.epilogue.NotLogged;
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.commands.Drive;
 import frc.robot.subsystems.Arm;
@@ -94,20 +89,15 @@ public class RobotContainer {
 
   private void configureBindings() {
 
-    driveStick.y().onTrue(Commands.runOnce(arm::armDown, arm));
-    driveStick.x().onTrue(Commands.runOnce(arm::armUp, arm));
+    driveStick.a().whileTrue(arm.outtake());
+    driveStick.b().whileTrue(arm.loadPos());
 
-    driveStick.leftTrigger().whileTrue(intake.intake());
-    driveStick.rightTrigger().whileTrue(intake.outtake());
+    driveStick.leftBumper().whileTrue(intake.intake());
+    driveStick.rightBumper().whileTrue(intake.reverse());
 
-    driveStick.leftBumper().onTrue(intakeFolding.intakePos());
+    driveStick.leftTrigger().whileTrue(intakeFolding.intakePos());
+    driveStick.rightTrigger().whileTrue(intakeFolding.outtakePos());
 
-  }
-
-  private boolean anyJoystickInput() {
-    return deadband(driveStick.getLeftY(), DriveConstants.autoCancelThreshold) != 0
-        || deadband(driveStick.getLeftX(), DriveConstants.autoCancelThreshold) != 0
-        || deadband(driveStick.getRightX(), DriveConstants.autoCancelThreshold) != 0;
   }
 
   public Command getAutonomousCommand() {
