@@ -113,8 +113,9 @@ public class Drivebase extends SubsystemBase {
 
     // Sets the default value of the drive speed ratio. Without this, the robot
     // won't move because it has not value to use to calculate its speed.
-    this.driveSpeedChooser.setDefaultOption("Full Speed", 1.5);
+    this.driveSpeedChooser.setDefaultOption("Full Speed", 1.0);
     // Adds additional options for the drive speed ratio.
+    this.driveSpeedChooser.addOption("over drive", 1.5);
     this.driveSpeedChooser.addOption("Three-Quarter Speed", 0.75);
     this.driveSpeedChooser.addOption("Half Speed", 0.5);
     this.driveSpeedChooser.addOption("Quarter Speed", 0.25);
