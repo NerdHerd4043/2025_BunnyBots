@@ -10,7 +10,7 @@ public class Auto extends Command {
 
     }
 
-    public static Command auto() {
-        return run(() -> drivebase.defaultDrive(0, 1, 0, true));
-    }
+    // public static Command auto() {
+    // return run(() -> drivebase.defaultDrive(0, 1, 0, true));
+    // }
 }
