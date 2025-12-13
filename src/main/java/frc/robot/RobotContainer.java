@@ -101,6 +101,8 @@ public class RobotContainer {
     driveStick.leftTrigger().whileTrue(intakeFolding.intakePos());
     driveStick.rightTrigger().whileTrue(intakeFolding.startPos());
 
+    driveStick.povUp().onTrue(drivebase.resetGyroCommand());
+
   }
 
   public Command getAutonomousCommand() {
