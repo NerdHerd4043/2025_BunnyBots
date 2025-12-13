@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.Auto;
 
 @Logged
 public class Robot extends TimedRobot {
@@ -54,7 +55,7 @@ public class Robot extends TimedRobot {
     // LimelightHelpers.setPipelineIndex("limelight-left", 0);
     // LimelightHelpers.setPipelineIndex("limelight-right", 0);
 
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    m_autonomousCommand = new Auto();
 
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();

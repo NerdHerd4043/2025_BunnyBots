@@ -5,19 +5,23 @@ import frc.robot.subsystems.Drivebase;
 
 public class Auto extends Command {
 
-    Drivebase drivebase = new Drivebase();
-
     public Auto() {
-    }
+        Drivebase drivebase = new Drivebase();
 
-    @Override
-    public void initialize() {
+        // drivebase = subsystems;
+        // addRequirements(drivebase);
         drivebase.defaultDrive(0, 1, 0, true);
+
     }
 
-    @Override
-    public boolean isFinished() {
-        return true;
-    }
+    // @Override
+    // public void initialize() {
+    // drivebase.defaultDrive(0, 1, 0, true);
+    // }
+
+    // @Override
+    // public boolean isFinished() {
+    // return true;
+    // }
 
 }
