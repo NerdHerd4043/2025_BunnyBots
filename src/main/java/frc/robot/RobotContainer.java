@@ -94,8 +94,8 @@ public class RobotContainer {
     driveStick.b().whileTrue(arm.loadPos());
 
     // runs the intake
-    driveStick.leftBumper().whileTrue(intake.intake());
-    driveStick.rightBumper().whileTrue(intake.reverse());
+    driveStick.rightBumper().whileTrue(intake.intake());
+    driveStick.leftBumper().whileTrue(intake.reverse());
 
     // moves the intake
     driveStick.leftTrigger().whileTrue(intakeFolding.intakePos());

@@ -28,7 +28,7 @@ public class Intake extends SubsystemBase {
 
     public Command intake() {
         return this.run(() -> {
-            upperIntakeMotor.set(0.5);
+            upperIntakeMotor.set(-0.5);
         }).finallyDo(() -> {
             upperIntakeMotor.stopMotor();
         });
@@ -36,7 +36,7 @@ public class Intake extends SubsystemBase {
 
     public Command reverse() {
         return this.run(() -> {
-            upperIntakeMotor.set(-0.5);
+            upperIntakeMotor.set(0.5);
         }).finallyDo(() -> {
             upperIntakeMotor.stopMotor();
         });

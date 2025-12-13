@@ -30,7 +30,7 @@ public class Arm extends SubsystemBase {
 
     public Command loadPos() {
         return this.run(() -> {
-            armMotor.set(-0.2);
+            armMotor.set(-0.05);
         }).finallyDo(() -> {
             armMotor.stopMotor();
         });
