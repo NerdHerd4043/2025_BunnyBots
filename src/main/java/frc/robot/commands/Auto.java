@@ -5,12 +5,10 @@ import frc.robot.subsystems.Drivebase;
 
 public class Auto extends Command {
 
-    public Auto() {
-        Drivebase drivebase = new Drivebase();
+    Drivebase drivebase = new Drivebase();
 
-        // drivebase = subsystems;
-        // addRequirements(drivebase);
-        drivebase.defaultDrive(0, 1, 0, true);
+    public Auto() {
+        new DrivingAuto();
 
     }
 
