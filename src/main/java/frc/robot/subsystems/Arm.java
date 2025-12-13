@@ -21,7 +21,7 @@ public class Arm extends SubsystemBase {
 
     public Command outtake() {
         return this.run(() -> {
-            armMotor.set(0.2);
+            armMotor.set(0.4);
         }).finallyDo(() -> {
             armMotor.stopMotor();
         });
