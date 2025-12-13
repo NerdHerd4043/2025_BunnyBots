@@ -189,7 +189,7 @@ public class Drivebase extends SubsystemBase {
   }
 
   public double getDriverMaxVelocity() {
-    return DriveConstants.maxVelocity * this.getRobotSpeedRatio();
+    return DriveConstants.maxVelocity;
   }
 
   public double getTrueMaxVelocity() {
